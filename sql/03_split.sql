@@ -1,0 +1,27 @@
+-- Step 2: top-30 drugs picked from TRAIN rows only, then 80/20 hash split
+CREATE OR REPLACE TABLE faers.top_drugs AS
+SELECT suspect_drug, COUNT(*) AS n
+FROM faers.reports_flat
+WHERE MOD(ABS(FARM_FINGERPRINT(CAST(safetyreportid AS STRING))), 10) < 8
+  AND suspect_drug IS NOT NULL
+GROUP BY suspect_drug
+ORDER BY n DESC
+LIMIT 30;
+
+CREATE OR REPLACE TABLE faers.train AS
+SELECT r.safetyreportid, r.label,
+       IF(r.age_years BETWEEN 0 AND 120, r.age_years, NULL) AS age_years,
+       IFNULL(r.sex, 'UNK') AS sex, r.n_drugs, r.n_reactions,
+       IFNULL(t.suspect_drug, 'OTHER') AS drug_group
+FROM faers.reports_flat r
+LEFT JOIN faers.top_drugs t USING (suspect_drug)
+WHERE MOD(ABS(FARM_FINGERPRINT(CAST(r.safetyreportid AS STRING))), 10) < 8;
+
+CREATE OR REPLACE TABLE faers.test AS
+SELECT r.safetyreportid, r.label,
+       IF(r.age_years BETWEEN 0 AND 120, r.age_years, NULL) AS age_years,
+       IFNULL(r.sex, 'UNK') AS sex, r.n_drugs, r.n_reactions,
+       IFNULL(t.suspect_drug, 'OTHER') AS drug_group
+FROM faers.reports_flat r
+LEFT JOIN faers.top_drugs t USING (suspect_drug)
+WHERE MOD(ABS(FARM_FINGERPRINT(CAST(r.safetyreportid AS STRING))), 10) >= 8;

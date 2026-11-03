@@ -1,0 +1,37 @@
+CREATE OR REPLACE TABLE faers.rx_flags AS
+SELECT safetyreportid,
+  COUNTIF(term = 'DRUG INEFFECTIVE') > 0 AS rx_drug_ineffective,
+  COUNTIF(term = 'NAUSEA') > 0 AS rx_nausea,
+  COUNTIF(term = 'FATIGUE') > 0 AS rx_fatigue,
+  COUNTIF(term = 'OFF LABEL USE') > 0 AS rx_off_label_use,
+  COUNTIF(term = 'DIARRHOEA') > 0 AS rx_diarrhoea,
+  COUNTIF(term = 'PAIN') > 0 AS rx_pain,
+  COUNTIF(term = 'HEADACHE') > 0 AS rx_headache,
+  COUNTIF(term = 'DYSPNOEA') > 0 AS rx_dyspnoea,
+  COUNTIF(term = 'DIZZINESS') > 0 AS rx_dizziness,
+  COUNTIF(term = 'VOMITING') > 0 AS rx_vomiting,
+  COUNTIF(term = 'RASH') > 0 AS rx_rash,
+  COUNTIF(term = 'MALAISE') > 0 AS rx_malaise,
+  COUNTIF(term = 'ARTHRALGIA') > 0 AS rx_arthralgia,
+  COUNTIF(term = 'ASTHENIA') > 0 AS rx_asthenia,
+  COUNTIF(term = 'PRURITUS') > 0 AS rx_pruritus,
+  COUNTIF(term = 'INCORRECT DOSE ADMINISTERED') > 0 AS rx_incorrect_dose_administered,
+  COUNTIF(term = 'PYREXIA') > 0 AS rx_pyrexia,
+  COUNTIF(term = 'FALL') > 0 AS rx_fall,
+  COUNTIF(term = 'INJECTION SITE PAIN') > 0 AS rx_injection_site_pain,
+  COUNTIF(term = 'INSOMNIA') > 0 AS rx_insomnia
+FROM (SELECT DISTINCT r.safetyreportid, UPPER(TRIM(x.reactionmeddrapt)) AS term
+      FROM faers.drug_event_raw r, UNNEST(r.patient.reaction) x)
+GROUP BY safetyreportid; -- at [2:1]
+Created faers-sandbox-10151307.faers.rx_flags
+
+CREATE OR REPLACE TABLE faers.train_rx AS
+SELECT t.*, IFNULL(f.rx_drug_ineffective, FALSE) AS rx_drug_ineffective, IFNULL(f.rx_nausea, FALSE) AS rx_nausea, IFNULL(f.rx_fatigue, FALSE) AS rx_fatigue, IFNULL(f.rx_off_label_use, FALSE) AS rx_off_label_use, IFNULL(f.rx_diarrhoea, FALSE) AS rx_diarrhoea, IFNULL(f.rx_pain, FALSE) AS rx_pain, IFNULL(f.rx_headache, FALSE) AS rx_headache, IFNULL(f.rx_dyspnoea, FALSE) AS rx_dyspnoea, IFNULL(f.rx_dizziness, FALSE) AS rx_dizziness, IFNULL(f.rx_vomiting, FALSE) AS rx_vomiting, IFNULL(f.rx_rash, FALSE) AS rx_rash, IFNULL(f.rx_malaise, FALSE) AS rx_malaise, IFNULL(f.rx_arthralgia, FALSE) AS rx_arthralgia, IFNULL(f.rx_asthenia, FALSE) AS rx_asthenia, IFNULL(f.rx_pruritus, FALSE) AS rx_pruritus, IFNULL(f.rx_incorrect_dose_administered, FALSE) AS rx_incorrect_dose_administered, IFNULL(f.rx_pyrexia, FALSE) AS rx_pyrexia, IFNULL(f.rx_fall, FALSE) AS rx_fall, IFNULL(f.rx_injection_site_pain, FALSE) AS rx_injection_site_pain, IFNULL(f.rx_insomnia, FALSE) AS rx_insomnia
+FROM faers.train t LEFT JOIN faers.rx_flags f USING (safetyreportid); -- at [28:1]
+Created faers-sandbox-10151307.faers.train_rx
+
+CREATE OR REPLACE TABLE faers.test_rx AS
+SELECT t.*, IFNULL(f.rx_drug_ineffective, FALSE) AS rx_drug_ineffective, IFNULL(f.rx_nausea, FALSE) AS rx_nausea, IFNULL(f.rx_fatigue, FALSE) AS rx_fatigue, IFNULL(f.rx_off_label_use, FALSE) AS rx_off_label_use, IFNULL(f.rx_diarrhoea, FALSE) AS rx_diarrhoea, IFNULL(f.rx_pain, FALSE) AS rx_pain, IFNULL(f.rx_headache, FALSE) AS rx_headache, IFNULL(f.rx_dyspnoea, FALSE) AS rx_dyspnoea, IFNULL(f.rx_dizziness, FALSE) AS rx_dizziness, IFNULL(f.rx_vomiting, FALSE) AS rx_vomiting, IFNULL(f.rx_rash, FALSE) AS rx_rash, IFNULL(f.rx_malaise, FALSE) AS rx_malaise, IFNULL(f.rx_arthralgia, FALSE) AS rx_arthralgia, IFNULL(f.rx_asthenia, FALSE) AS rx_asthenia, IFNULL(f.rx_pruritus, FALSE) AS rx_pruritus, IFNULL(f.rx_incorrect_dose_administered, FALSE) AS rx_incorrect_dose_administered, IFNULL(f.rx_pyrexia, FALSE) AS rx_pyrexia, IFNULL(f.rx_fall, FALSE) AS rx_fall, IFNULL(f.rx_injection_site_pain, FALSE) AS rx_injection_site_pain, IFNULL(f.rx_insomnia, FALSE) AS rx_insomnia
+FROM faers.test t LEFT JOIN faers.rx_flags f USING (safetyreportid); -- at [32:1]
+Created faers-sandbox-10151307.faers.test_rx
+

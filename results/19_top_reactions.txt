@@ -1,0 +1,36 @@
+CREATE OR REPLACE TABLE faers.top_reactions AS
+SELECT UPPER(TRIM(x.reactionmeddrapt)) AS term, COUNT(DISTINCT r.safetyreportid) AS n
+FROM faers.drug_event_raw r, UNNEST(r.patient.reaction) x
+JOIN faers.train t USING (safetyreportid)
+WHERE x.reactionmeddrapt IS NOT NULL
+  AND NOT REGEXP_CONTAINS(UPPER(x.reactionmeddrapt), r'DEATH|DIED|FATAL|HOSPITAL|SUICIDE|LIFE THREATENING')
+GROUP BY term
+ORDER BY n DESC
+LIMIT 20; -- at [2:1]
+Created faers-sandbox-10151307.faers.top_reactions
+
+SELECT * FROM faers.top_reactions ORDER BY n DESC; -- at [11:1]
++-----------------------------+-------+
+|            term             |   n   |
++-----------------------------+-------+
+| DRUG INEFFECTIVE            | 14980 |
+| NAUSEA                      |  8963 |
+| FATIGUE                     |  7637 |
+| OFF LABEL USE               |  7585 |
+| DIARRHOEA                   |  6537 |
+| PAIN                        |  6534 |
+| HEADACHE                    |  6465 |
+| DYSPNOEA                    |  6138 |
+| DIZZINESS                   |  5485 |
+| VOMITING                    |  5235 |
+| RASH                        |  5002 |
+| MALAISE                     |  4414 |
+| ARTHRALGIA                  |  4156 |
+| ASTHENIA                    |  4002 |
+| PRURITUS                    |  3967 |
+| INCORRECT DOSE ADMINISTERED |  3716 |
+| PYREXIA                     |  3698 |
+| FALL                        |  3473 |
+| INJECTION SITE PAIN         |  3346 |
+| INSOMNIA                    |  3226 |
++-----------------------------+-------+

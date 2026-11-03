@@ -1,0 +1,4 @@
+Warning encountered during job execution:
+
+b'[query] The input data has NULL values in one or more columns: age_years. BQML automatically handles null values (See https://cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-auto-preprocessing#imputation). If null values represent a special value in the data, replace them with the desired value before training and then retry.'
+

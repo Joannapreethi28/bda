@@ -1,0 +1,18 @@
+[
+  {"name": "safetyreportid", "type": "STRING"},
+  {"name": "receivedate", "type": "STRING"},
+  {"name": "seriousnesshospitalization", "type": "STRING"},
+  {"name": "seriousnessdeath", "type": "STRING"},
+  {"name": "patient", "type": "RECORD", "fields": [
+    {"name": "patientsex", "type": "STRING"},
+    {"name": "patientonsetage", "type": "STRING"},
+    {"name": "patientonsetageunit", "type": "STRING"},
+    {"name": "drug", "type": "RECORD", "mode": "REPEATED", "fields": [
+      {"name": "medicinalproduct", "type": "STRING"},
+      {"name": "drugcharacterization", "type": "STRING"}
+    ]},
+    {"name": "reaction", "type": "RECORD", "mode": "REPEATED", "fields": [
+      {"name": "reactionmeddrapt", "type": "STRING"}
+    ]}
+  ]}
+]

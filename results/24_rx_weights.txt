@@ -1,0 +1,24 @@
++--------------------------------+----------------------+
+|        processed_input         | effect_true_vs_false |
++--------------------------------+----------------------+
+| rx_fall                        |                0.695 |
+| rx_pyrexia                     |                0.682 |
+| rx_dyspnoea                    |                0.332 |
+| rx_vomiting                    |                0.322 |
+| rx_asthenia                    |                0.269 |
+| rx_malaise                     |                0.011 |
+| rx_diarrhoea                   |               -0.001 |
+| rx_off_label_use               |               -0.164 |
+| rx_nausea                      |               -0.183 |
+| rx_dizziness                   |               -0.195 |
+| rx_pain                        |               -0.239 |
+| rx_fatigue                     |               -0.297 |
+| rx_headache                    |               -0.306 |
+| rx_rash                        |               -0.355 |
+| rx_arthralgia                  |               -0.365 |
+| rx_insomnia                    |               -0.416 |
+| rx_pruritus                    |               -0.446 |
+| rx_incorrect_dose_administered |                -0.54 |
+| rx_drug_ineffective            |               -0.554 |
+| rx_injection_site_pain         |               -0.669 |
++--------------------------------+----------------------+

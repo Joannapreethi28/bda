@@ -1,0 +1,43 @@
++-----------------+---------+--------------------------------------+
+| processed_input | weight  |               category               |
++-----------------+---------+--------------------------------------+
+| __INTERCEPT__   | -0.0461 | NULL                                 |
+| age_years       |  0.2413 | NULL                                 |
+| drug_group      |  1.5233 | AVONEX                               |
+| drug_group      |  0.5805 | REMICADE                             |
+| drug_group      |  0.4991 | ELIQUIS                              |
+| drug_group      |  0.2737 | OTHER                                |
+| drug_group      |  0.1836 | REVLIMID                             |
+| drug_group      |  0.0733 | OXYCONTIN                            |
+| drug_group      |   0.058 | IBRANCE                              |
+| drug_group      | -0.0063 | SKYRIZI                              |
+| drug_group      | -0.0486 | HUMIRA                               |
+| drug_group      | -0.0783 | TYSABRI                              |
+| drug_group      | -0.2735 | ENTRESTO                             |
+| drug_group      |   -0.74 | PROLIA                               |
+| drug_group      | -0.8348 | ENBREL                               |
+| drug_group      |  -0.872 | LYRICA                               |
+| drug_group      | -1.0313 | GILENYA                              |
+| drug_group      | -1.0319 | ORENCIA                              |
+| drug_group      | -1.0714 | COSENTYX                             |
+| drug_group      | -1.3655 | MIRENA                               |
+| drug_group      | -1.4613 | BYETTA                               |
+| drug_group      | -1.5087 | TRULICITY                            |
+| drug_group      | -1.5181 | CHANTIX                              |
+| drug_group      |  -1.584 | ZANTAC                               |
+| drug_group      | -1.5895 | NEULASTA                             |
+| drug_group      | -1.6455 | RANITIDINE.                          |
+| drug_group      |  -1.665 | DUPIXENT                             |
+| drug_group      | -1.6822 | RISPERDAL                            |
+| drug_group      | -1.6984 | AIMOVIG                              |
+| drug_group      | -1.7704 | REPATHA                              |
+| drug_group      |  -1.884 | ALLI                                 |
+| drug_group      | -2.1657 | PROACTIV MD ADAPALENE ACNE TREATMENT |
+| drug_group      |  -2.186 | PROACTIV MD DAILY OIL CONTROL SPF 30 |
+| n_drugs         |  0.2679 | NULL                                 |
+| n_reactions     |   0.202 | NULL                                 |
+| sex             |  0.2669 | 1                                    |
+| sex             | -0.1344 | 0                                    |
+| sex             | -0.1711 | 2                                    |
+| sex             | -0.4449 | UNK                                  |
++-----------------+---------+--------------------------------------+

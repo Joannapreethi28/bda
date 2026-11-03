@@ -1,0 +1,6 @@
+-- Upgrade A: does adding reaction flags help? (same test rows as before)
+SELECT 'logreg_rx' AS model, * FROM ML.EVALUATE(MODEL faers.m_logreg_rx, (SELECT label, age_years, sex, n_drugs, n_reactions, drug_group, rx_drug_ineffective, rx_nausea, rx_fatigue, rx_off_label_use, rx_diarrhoea, rx_pain, rx_headache, rx_dyspnoea, rx_dizziness, rx_vomiting, rx_rash, rx_malaise, rx_arthralgia, rx_asthenia, rx_pruritus, rx_incorrect_dose_administered, rx_pyrexia, rx_fall, rx_injection_site_pain, rx_insomnia FROM faers.test_rx)) UNION ALL
+SELECT 'boosted_rx', * FROM ML.EVALUATE(MODEL faers.m_boosted_rx, (SELECT label, age_years, sex, n_drugs, n_reactions, drug_group, rx_drug_ineffective, rx_nausea, rx_fatigue, rx_off_label_use, rx_diarrhoea, rx_pain, rx_headache, rx_dyspnoea, rx_dizziness, rx_vomiting, rx_rash, rx_malaise, rx_arthralgia, rx_asthenia, rx_pruritus, rx_incorrect_dose_administered, rx_pyrexia, rx_fall, rx_injection_site_pain, rx_insomnia FROM faers.test_rx)) UNION ALL
+SELECT 'logreg_base', * FROM ML.EVALUATE(MODEL faers.m_logreg, (SELECT * FROM faers.test)) UNION ALL
+SELECT 'boosted_tuned_base', * FROM ML.EVALUATE(MODEL faers.m_boosted_tuned, (SELECT * FROM faers.test))
+ORDER BY roc_auc DESC;
